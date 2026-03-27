@@ -282,15 +282,15 @@ fprintf('SPI maximo: %.2f\n',max(SPI))
     
 12. Análisis de resultados
 
-13. Preguntas para la discusión
+## 13. Preguntas para la discusión
 
-## 13.1 ¿Cómo se relacionan las variaciones del volumen sanguíneo periférico con el balance autonómico?
+### 13.1 ¿Cómo se relacionan las variaciones del volumen sanguíneo periférico con el balance autonómico?
     
 Las variaciones del volumen sanguíneo periférico se relacionan directamente con el balance autonómico porque la señal PPG depende del flujo sanguíneo periférico y del tono vascular, ambos regulados por el sistema nervioso autónomo. Cuando aumenta la actividad simpática, suele presentarse vasoconstricción periférica y disminución de la perfusión, lo que puede reducir la amplitud de la onda pletismográfica; en condiciones de mayor estabilidad o predominio vagal, la perfusión periférica tiende a ser más uniforme [1], [6], [7], [10].
 
 Además, se ha reportado que características extraídas de la PPG permiten diferenciar estados de activación autonómica, incluyendo respiración profunda, cold pressor test y activación simpática cardiaca. Por eso, los cambios en amplitud y variabilidad de la señal periférica pueden interpretarse como una manifestación indirecta del equilibrio entre actividad simpática y parasimpática [10]
     
-## 14.2 ¿Cómo se compara el SPI con otros índices como ANI e índice de perfusión?
+### 13.2 ¿Cómo se compara el SPI con otros índices como ANI e índice de perfusión?
 
 El SPI es un índice orientado al monitoreo de nocicepción que usa señales fotopletismográficas y cardiovasculares, por lo que integra cambios del pulso periférico y del intervalo entre latidos en un valor numérico fácil de interpretar [11]. En cambio, el ANI se basa principalmente en el análisis de la variabilidad de la frecuencia cardiaca, por lo que refleja sobre todo el componente parasimpático del balance autonómico [12].
 
