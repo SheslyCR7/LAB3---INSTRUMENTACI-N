@@ -1,8 +1,21 @@
-# LAB3---INSTRUMENTACI-N
+# Instrumentación Biomédica y Biosensores 
+ LABORATORIO - 3 Estimación del nivel de estrés basada en la respuesta galvánica cutánea (GSR) 
+
+###  Integrantes
+- Shesly Nicole Colorado - 5600756
+- Santiago Mora - 5600775
+- Daniel Herrera - 5600588
 
 
-1. Integrantes: Shesly Colorado 5600756 -
-   
+## Requisitos
+Software:
+- Arduino IDE
+- MATLAB
+
+Hardware:
+- Sensor de humedad del suelo YL-100
+- ESP32
+----
 3. Introducción
 
 La fotopletismografía (PPG) es una técnica óptica que permite medir variaciones en el volumen sanguíneo periférico. A partir de esta señal, es posible extraer información cardiovascular como la frecuencia cardiaca y la amplitud del pulso.
