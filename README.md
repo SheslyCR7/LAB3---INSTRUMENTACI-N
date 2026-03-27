@@ -306,7 +306,9 @@ A partir del cálculo del índice pletismográfico quirúrgico se obtuvieron los
 Estos valores representan el rango de variación del índice durante la adquisición de la señal.
 
 ### 4.7 Tabla resumen(reposo, CPT, recuperación)
+
 Se elaboró una tabla resumen que contiene los valores representativos de los parámetros calculados (frecuencia cardíaca y SPI) en tres condiciones experimentales: reposo, durante la aplicación del Cold Pressor Test (CPT) y en la fase de recuperación. Esta tabla permite organizar los resultados obtenidos para su posterior análisis.
+
 -----   
 # Análisis de resultados
 
@@ -331,11 +333,14 @@ Por su parte, el índice de perfusión (PI) no está diseñado específicamente 
 
 De forma general, las revisiones disponibles muestran que SPI y ANI son herramientas útiles, pero ninguna es perfecta ni universal para todos los contextos clínicos. Por eso, deben interpretarse como índices complementarios dentro del análisis fisiológico y no como medidas absolutas del dolor [12], [14]
 
-
+-----
 # Conclusiones
 La práctica permitió comprobar que el SPI puede estimarse a partir de la señal PPG, utilizando principalmente el intervalo entre pulsos (PPI) y la amplitud del pulso (PPGA). Esto cumple con el objetivo de extraer información fisiológica relevante a partir de una medición no invasiva, evidenciando la relación entre la señal y la actividad del sistema nervioso autónomo.
-El montaje analógico propuesto inicialmente presentó dificultades prácticas debido a su alta sensibilidad a ruido, calibración y condiciones de implementación. Por esta razón, el uso del ESP32 junto con el sensor MAX30102 permitió obtener una señal más estable y adecuada para el procesamiento en MATLAB, facilitando la detección de picos y el cálculo del SPI.
+
+El montaje analógico propuesto inicialmente presentó dificultades prácticas debido a su alta sensibilidad,dificultad al  calibración y condiciones de implementación. Por esta razón, el uso del ESP32 junto con el sensor MAX30102 permitió obtener una señal más estable y adecuada para el procesamiento en MATLAB, facilitando la detección de picos y el cálculo del SPI.
+
 Una limitación importante fue que el análisis se centró principalmente en valores globales (como el SPI promedio), sin realizar una comparación detallada entre las fases de reposo, CPT y recuperación. Esto impidió aprovechar completamente el protocolo experimental para interpretar los cambios fisiológicos inducidos por el estímulo.
+
 En general, la práctica permitió comprender que el SPI no depende únicamente de una fórmula, sino de toda una cadena de adquisición, procesamiento y análisis. Además, se evidenció que este índice debe interpretarse como una herramienta complementaria para evaluar cambios autonómicos, teniendo en cuenta sus limitaciones experimentales y su diferencia frente a mediciones clínicas directas.
 
 -----   
