@@ -45,8 +45,10 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
 - Se conectó el sensor MAX30102 al Arduino mediante comunicación I2C para la adquisición de la señal PPG.
  <p align="center">
   <img src="https://github.com/user-attachments/assets/398e4e7b-26f6-42a2-b0d6-675c15f29b49" width="400">
-  Fig. 1.
-</p>
+ </p>
+ <p align="center">
+     Fig. 1. Montaje Implementado
+    </p>
 
    ### 2.1 Conexión con ESP32
 En esta práctica se utilizó un ESP32 junto con el sensor MAX30102 para adquirir la señal fotopletismográfica. En el código de Arduino IDE, la comunicación con el sensor se realizó por protocolo I2C mediante Wire.begin(21,22), y la transmisión de datos hacia MATLAB se hizo por puerto serial a 115200 baudios. Además, el sistema se configuró para trabajar a una frecuencia de muestreo de 100 Hz, adecuada para registrar la onda de pulso periférica y sus variaciones en el tiempo. La PPG es una técnica óptica no invasiva que permite medir cambios de volumen sanguíneo periférico y obtener información cardiovascular a partir de la señal registrada [1].
@@ -62,9 +64,10 @@ Para la detección de picos se implementó en MATLAB una versión adaptada del m
   
   <p align="center">
   <img width="400" height="295" alt="image" src="https://github.com/user-attachments/assets/0f802563-062f-4003-9a82-58bd38d0d904" />
-     Fig. 2.
    </p>
-   
+   <p align="center">
+     Fig. 2. Explicacion del cálculo de SPI
+    </p>
 Una vez detectados los picos, se calculó el intervalo entre pulsos consecutivos (PPI) y la amplitud de la onda pletismográfica (PPGA), definida como la diferencia entre el pico y el valle asociado. Estas dos variables tienen fundamento fisiológico porque la PPG refleja cambios de volumen sanguíneo periférico, los cuales dependen tanto de la dinámica cardiaca como del tono vascular [1], [7]. En este trabajo, el SPI se estimó a partir de una combinación normalizada de PPI y PPGA, lo cual permitió obtener un índice relativo de cambio fisiológico a lo largo del experimento. Aunque esta implementación corresponde a una aproximación académica, conserva la idea de relacionar la amplitud del pulso y el intervalo entre latidos con la actividad autonómica y la respuesta fisiológica al estímulo [1], [6].
   ### 2.7 Protocolo experimental (CPT)
   
@@ -102,8 +105,10 @@ El Cold Pressor Test es una técnica utilizada para inducir una respuesta de est
 <p align="center">
  <img width="282" height="179" alt="image" src="https://github.com/user-attachments/assets/a1045cbd-82ec-4ae5-9e56-4f063caf64c1" />
  <img width="282" height="179" alt="image" src="https://github.com/user-attachments/assets/27fc55ec-5aa0-41b4-b0ce-858f1c8a9bef" />
-   Fig. 3.
 </p>
+ <p align="center">
+     Fig. 3. Fases e implementacion de la tecnica CPT
+    </p>
 
 ----
 
