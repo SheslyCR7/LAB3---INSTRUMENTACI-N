@@ -71,8 +71,11 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
 16. Preguntas para la discusión
     13.1 ¿Cómo se relacionan las variaciones del volumen sanguíneo periférico con el balance autonómico?
     
-    13.2 ¿Cómo se compara el SPI con otros índices como ANI e índice de perfusión?
+    El VSP periférico modula por reflejos venoarteriales: simpático causa vasoconstricción centralizando volumen (↓VSP periférico), parasimpático lo distribuye (↑flujo esplácnico/periférico). Desbalance simpático-vagal (↑simpático) reduce VFC y PPG variabilidad, como en hiperreactividad cardiovascular basal; Poincaré plot (SD1/SD2 ↓) lo confirma. [6]
     
+    13.2 ¿Cómo se compara el SPI con otros índices como ANI e índice de perfusión?
+
+    SPI (GE Healthcare) integra PPGA y HBI para nocicepción (rango 0-100, ideal 20-50); ANI (parasimpático vía HRV-RR) mide analgesia (↑50=buena), sensible a vagal pero menos a hipovolemia. Índice perfusión (PI/PVi, Masimo) evalúa perfusión/volumen (PI=AC/DC %, PVi>13% óptimo), sensible a volemia/vasotono pero no específico de nocicepción (↑PVi=buena hidratación) [8][9].    
 18. Conclusiones
 19. Bibliografía
 
@@ -85,4 +88,12 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
 [4] Hubli, M., Bolt, D., & Krassioukov, A. V. (2017). Cold pressor test in spinal cord injury—revisited. Spinal Cord, 56(6), 528–537. https://doi.org/10.1038/s41393-017-0037-z
 
 [5] Han, Y., Du, J., Wang, J., Liu, B., Yan, Y., Deng, S., Zou, Y., Jing, X., Du, J., Liu, Y., & She, Q. (2022). Cold pressor test in primary Hypertension: A Cross-Sectional Study. Frontiers in Cardiovascular Medicine, 9, 860322. https://doi.org/10.3389/fcvm.2022.860322
+
+[6] Low, P. (2001). Fisiología del sistema nervioso autónomo. Medwave, 1(04). https://doi.org/10.5867/medwave.2001.04.3347
+
+[7] Dalmau, R. (2019). Volumen sanguíneo: su distribución y relación con la precarga ventricular. Revista Chilena De Anestesia, 48(3), 205–207. https://doi.org/10.25237/revchilanestv48n03.02
+
+[8] https://www.pvequip.cl/wp-content/uploads/2016/09/PVI_Spanish-Mayo-2015.pdf
+
+[9] https://www.anestesia.org.ar/publicaciones/RAA71-02_07_Tecnologia.pdf
 
