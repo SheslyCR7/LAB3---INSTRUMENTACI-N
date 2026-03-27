@@ -302,8 +302,8 @@ La amplitud de pulso (PPGA) se obtuvo como la diferencia entre cada pico y su va
 En la Figura 6 se presenta la evolución temporal del índice pletismográfico quirúrgico (SPI), calculado a partir de los parámetros PPI y PPGA. La señal muestra variaciones a lo largo del tiempo, permitiendo observar cambios en el comportamiento del índice durante la adquisición.
 
 <p align="center"> <img width="300" height="190" alt="image" src="https://github.com/user-attachments/assets/76d701ba-5a51-43af-bdaf-18645facece3" /> <br> <b>Fig. 6.</b> Evolución temporal del índice pletismográfico quirúrgico (SPI). </p>
-### 4.7 Valores del SPI
 
+###  4.7 Valores del SPI
 A partir del cálculo del índice pletismográfico quirúrgico se obtuvieron los siguientes valores:
 - SPI promedio: 48.39
 - SPI mínimo: 28.64
