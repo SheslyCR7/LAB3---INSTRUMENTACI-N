@@ -46,8 +46,6 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
 
 ------
 # 5. Procedimiento experimental
-- Montaje del sistema de adquisición
-- Se conectó el sensor MAX30102 al Arduino mediante comunicación I2C para la adquisición de la señal PPG.
  <p align="center">
   <img src="https://github.com/user-attachments/assets/398e4e7b-26f6-42a2-b0d6-675c15f29b49" width="400">
  </p>
