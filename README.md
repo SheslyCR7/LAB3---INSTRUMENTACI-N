@@ -40,6 +40,11 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
    
 # Seguridad en el laboratorio
 
+- Se verificaron conexiones seguras entre el ESP32 y el sensor MAX30102, evitando cortocircuitos y asegurando un montaje estable en protoboard.
+- Para el estímulo fisiológico se utilizó una bolsa de gel frío congelada en lugar de agua, reduciendo riesgos y permitiendo un control seguro del tiempo de exposición.
+- Se supervisó al paciente durante la prueba y se evitó el contacto prolongado para prevenir molestias o lesiones.
+
+------
 # Procedimiento experimental
 - Montaje del sistema de adquisición
 - Se conectó el sensor MAX30102 al Arduino mediante comunicación I2C para la adquisición de la señal PPG.
