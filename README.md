@@ -5,18 +5,20 @@
 - Shesly Nicole Colorado - 5600756
 - Santiago Mora - 5600775
 - Daniel Herrera - 5600588
-
-
-## Requisitos
+### Requisitos
 Software:
 - Arduino IDE
 - MATLAB
-
+```python
+# Importamos las librerías necesarias:
+#include <Wire.h>
+#include "MAX30105.h"
+```
 Hardware:
-- Sensor de humedad del suelo YL-100
+- Biosensor óptico integrado MAX30102 
 - ESP32
 ----
-## 3. Introducción
+# Introducción
 
 La fotopletismografía (PPG) es una técnica óptica no invasiva que permite medir cambios en el volumen sanguíneo periférico mediante la interacción entre la luz y los tejidos biológicos [1].
 
@@ -24,62 +26,51 @@ A partir de esta señal es posible obtener parámetros fisiológicos como la fre
 
 El índice pletismográfico quirúrgico (SPI) es un parámetro derivado de la señal PPG que combina información del intervalo entre latidos y la amplitud del pulso, permitiendo estimar la respuesta fisiológica ante estímulos como el estrés o la nocicepción.
 
-## 4. Objetivos
-   
-   4.1 Objetivo general
-   
+#  Objetivos
+   ## 1.1 Objetivo general
    Desarrollar un sistema de medición continua del índice pletismográfico quirúrgico (SPI) en condiciones ambulatorias.
+   ## 1.2 Objetivos específicos
+   - Reconocer las características fundamentales de la onda de pulso a partir de las cuales se obtiene el SPI.
+   - Construir un sistema que calcule el SPI en tiempo real y bajo condiciones ambulatorias.
+   - Validar el funcionamiento del sistema desarrollado mediante un método que induzca una respuesta fisiológica similar a la que produce el dolor agudo.
    
-   4.2 Objetivos específicos
-
-   • Reconocer las características fundamentales de la onda de pulso a partir de las cuales se obtiene el SPI.
-   • Construir un sistema que calcule el SPI en tiempo real y bajo condiciones ambulatorias.
-   • Validar el funcionamiento del sistema desarrollado mediante un método que induzca una respuesta fisiológica similar a la que produce el dolor agudo.
-
-## 5. Descripción general de la práctica
+# Descripción general de la práctica
 
 Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX30102 conectado a un Arduino. La señal fue procesada en MATLAB, donde se aplicó un algoritmo de detección de picos basado en el método del alpinista. A partir de esta información se calcularon variables fisiológicas y el SPI, evaluando su comportamiento bajo diferentes condiciones experimentales.
    
-## 6. Materiales y herramientas utilizadas
+# Seguridad en el laboratorio
 
-   Arduino, sensor MAX30102, protoboard, cables, computador y MATLAB.
-   
-## 7. Seguridad en el laboratorio
+# Procedimiento experimental
+- Montaje del sistema de adquisición
+- Se conectó el sensor MAX30102 al Arduino mediante comunicación I2C para la adquisición de la señal PPG.
+ <p align="center">
+  <img src="https://github.com/user-attachments/assets/398e4e7b-26f6-42a2-b0d6-675c15f29b49" width="400">
+  Fig. 1.
+</p>
 
-8. Procedimiento experimental
-   8.1 Montaje del sistema de adquisición
-
-    Se conectó el sensor MAX30102 al Arduino mediante comunicación I2C para la adquisición de la señal PPG.
-
-    <img width="642" height="415" alt="image" src="https://github.com/user-attachments/assets/398e4e7b-26f6-42a2-b0d6-675c15f29b49" />
-
-   ### 8.2 Conexión con ESP32
+   ### 2.1 Conexión con ESP32
 En esta práctica se utilizó un ESP32 junto con el sensor MAX30102 para adquirir la señal fotopletismográfica. En el código de Arduino IDE, la comunicación con el sensor se realizó por protocolo I2C mediante Wire.begin(21,22), y la transmisión de datos hacia MATLAB se hizo por puerto serial a 115200 baudios. Además, el sistema se configuró para trabajar a una frecuencia de muestreo de 100 Hz, adecuada para registrar la onda de pulso periférica y sus variaciones en el tiempo. La PPG es una técnica óptica no invasiva que permite medir cambios de volumen sanguíneo periférico y obtener información cardiovascular a partir de la señal registrada [1].
 
-  ### 8.3 Verificación de la señal
+  ### 2.3 Verificación de la señal
 La verificación de la señal consistió en comprobar que la salida del sistema presentara una forma de onda periódica compatible con una señal PPG. En el código del ESP32 se tomó la lectura del canal infrarrojo con getIR() y posteriormente se invirtió la señal para facilitar su visualización. Esta etapa fue importante porque la señal PPG contiene una componente pulsátil asociada al ciclo cardiaco y una componente lenta relacionada con otros fenómenos fisiológicos [1]. Por ello, antes del procesamiento en MATLAB se verificó que la señal mostrara pulsos repetitivos y una amplitud suficientemente estable para detectar eventos característicos como picos y valles [1], [2].
-
-   
-  ### 8.4 Captura de datos
+  ### 2.4 Captura de datos
 
 La captura de datos se realizó en MATLAB, donde el programa recibió las muestras enviadas por el ESP32, las almacenó junto con su respectiva marca temporal y las representó en tiempo real en una gráfica. El script también permitió definir la duración de la toma y guardar la señal en un archivo .mat para su análisis posterior. Esta etapa fue necesaria porque el estudio del SPI requiere una señal continua y ordenada en el tiempo, a partir de la cual puedan calcularse variables como el intervalo entre pulsos y la amplitud del pulso [1].
-
-
-  ### 8.5 Detección de picos y valles
+  ### 2.5 Detección de picos y valles
 Para la detección de picos se implementó en MATLAB una versión adaptada del método del alpinista descrito por Argüello-Prada [3]. Este algoritmo se basa en contar ascensos consecutivos de la señal y utilizar un umbral para decidir cuándo una subida corresponde a un pico real. En el código, además, se incluyó un período refractario de 0.3 s para evitar detectar varias veces el mismo latido. Después de identificar los picos, se buscaron los mínimos entre pulsos consecutivos para obtener también los valles. Esta estrategia permitió caracterizar cada pulso con sus dos puntos principales: máximo y mínimo [3].
+  ### 2.6 Cálculo del SPI
+  
+  <p align="center">
+  <img width="400" height="295" alt="image" src="https://github.com/user-attachments/assets/0f802563-062f-4003-9a82-58bd38d0d904" />
+     Fig. 2.
+   </p>
    
-  ### 8.6 Cálculo del SPI
 Una vez detectados los picos, se calculó el intervalo entre pulsos consecutivos (PPI) y la amplitud de la onda pletismográfica (PPGA), definida como la diferencia entre el pico y el valle asociado. Estas dos variables tienen fundamento fisiológico porque la PPG refleja cambios de volumen sanguíneo periférico, los cuales dependen tanto de la dinámica cardiaca como del tono vascular [1], [7]. En este trabajo, el SPI se estimó a partir de una combinación normalizada de PPI y PPGA, lo cual permitió obtener un índice relativo de cambio fisiológico a lo largo del experimento. Aunque esta implementación corresponde a una aproximación académica, conserva la idea de relacionar la amplitud del pulso y el intervalo entre latidos con la actividad autonómica y la respuesta fisiológica al estímulo [1], [6].
-
-<img width="2006" height="1440" alt="image" src="https://github.com/user-attachments/assets/0f802563-062f-4003-9a82-58bd38d0d904" />
-
-
-  ### 8.7 Protocolo experimental (CPT)
+  ### 2.7 Protocolo experimental (CPT)
   
 El protocolo experimental se planteó en tres etapas: reposo, aplicación del Cold Pressor Test (CPT) y recuperación. El CPT se utilizó como maniobra para inducir una respuesta fisiológica aguda semejante a la activación asociada al dolor o al estrés, permitiendo observar cambios en la señal PPG y en el SPI. Esta prueba se emplea ampliamente para estudiar reactividad cardiovascular y activación del sistema nervioso autónomo [4], [5]. Desde el punto de vista fisiológico, el estímulo frío genera respuestas autonómicas que modifican el tono vascular periférico y la dinámica hemodinámica, lo que justifica su uso en esta práctica como método de validación del sistema desarrollado [4], [5], [6].   
 
-
-## 9. Fundamento teórico del SPI
+# Fundamento teórico del SPI
 
 El índice pletismográfico quirúrgico (SPI) se basa en la señal fotopletismográfica (PPG), una técnica óptica no invasiva que permite registrar cambios de volumen sanguíneo periférico [1]. Esta señal contiene información útil sobre el pulso cardiaco y sobre cambios en la perfusión periférica, por lo que puede emplearse para estudiar variaciones fisiológicas del sistema cardiovascular [1], [2].
 
@@ -103,19 +94,23 @@ SPI = 100 * (0.33 * PPI_norm + 0.67 * (1 - PPGA_norm))
 ```
 De esta manera, el SPI permitió observar cambios relativos en el estado fisiológico del sujeto a lo largo del experimento, especialmente antes, durante y después del CPT [4], [5].
 
-13. Técnica Cold Pressor Test (CPT)
+-----
+# Técnica Cold Pressor Test (CPT)
 
 El Cold Pressor Test es una técnica utilizada para inducir una respuesta de estrés fisiológico mediante la exposición al frío. Este estímulo activa el sistema nervioso simpático, generando cambios en la frecuencia cardiaca y en la señal PPG [4][5].
 
-<img width="282" height="179" alt="image" src="https://github.com/user-attachments/assets/a1045cbd-82ec-4ae5-9e56-4f063caf64c1" />
+<p align="center">
+ <img width="282" height="179" alt="image" src="https://github.com/user-attachments/assets/a1045cbd-82ec-4ae5-9e56-4f063caf64c1" />
+ <img width="282" height="179" alt="image" src="https://github.com/user-attachments/assets/27fc55ec-5aa0-41b4-b0ce-858f1c8a9bef" />
+   Fig. 3.
+</p>
 
-<img width="440" height="360" alt="image" src="https://github.com/user-attachments/assets/27fc55ec-5aa0-41b4-b0ce-858f1c8a9bef" />
+----
 
-
-10. Código desarrollado
+# Código desarrollado
     
-    ### 10.1 Código de captura
-    Se desarrolló un código en Arduino IDE para el ESP32 que adquiere la señal del sensor MAX30102 mediante comunicación I2C y la envía por puerto serial. La frecuencia de muestreo se fijó en 100 Hz, lo que permitió obtener una señal adecuada para su posterior procesamiento en MATLAB.
+   ### 3.1 Código de captura
+Se desarrolló un código en Arduino IDE para el ESP32 que adquiere la señal del sensor MAX30102 mediante comunicación I2C y la envía por puerto serial. La frecuencia de muestreo se fijó en 100 Hz, lo que permitió obtener una señal adecuada para su posterior procesamiento en MATLAB.
 
 Fragmento de código en ESP32:
 
@@ -175,7 +170,7 @@ while toc < duracion
 end
 ```
 
-  ### 10.2 Código de detección de picos
+  ### 3.2 Código de detección de picos
   
 Para detectar los latidos en la señal PPG se implementó en MATLAB una adaptación del método del alpinista, propuesto para detección de picos en señales fotopletismográficas [3]. El algoritmo cuenta ascensos consecutivos de la señal y usa un umbral para decidir cuándo se detecta un pico. Además, se incluyó un período refractario para evitar contar varias veces el mismo pulso [3].
 
@@ -223,7 +218,8 @@ end
 ```
 
    
-   ### 10.3 Código de cálculo del SPI
+   ### 3.3 Código de cálculo del SPI
+   
    
 A partir de los picos y valles detectados, el programa calculó dos variables principales: el intervalo entre pulsos consecutivos (PPI) y la amplitud del pulso (PPGA). Estas variables tienen sentido fisiológico porque la señal PPG refleja cambios de perfusión periférica y de dinámica cardiovascular [1], [7].
 
@@ -246,7 +242,7 @@ Luego, ambas variables se combinaron para obtener una estimación académica del
 SPI = 100 * (0.33 * PPI_norm + 0.67 * (1 - PPGA_norm));
 ```
 
-  ### 10.4 Código de evolución temporal del SPI
+  ### 3.4 Código de evolución temporal del SPI
 
 Finalmente, se desarrolló un segundo script en MATLAB para representar la evolución temporal del SPI durante el experimento. Esta gráfica permitió observar los cambios del índice a lo largo del tiempo y compararlos con las diferentes fases del protocolo experimental. Dado que el SPI se interpreta como un indicador indirecto de cambios autonómicos, su representación temporal resulta útil para analizar la respuesta fisiológica del sujeto [4], [5], [6].
 
@@ -272,48 +268,77 @@ fprintf('SPI promedio: %.2f\n',mean(SPI))
 fprintf('SPI minimo: %.2f\n',min(SPI))
 fprintf('SPI maximo: %.2f\n',max(SPI))
 ```
-11. Resultados experimentales
- - 11.1 Señal PPG cruda
- - 11.2 Señal con picos y valles detectados
-  - 11.3 Intervalo RR / PPI
-  - 11.4 Amplitud de pulso (PPGA)
-  - 11.5 Evolución temporal del SPI
-  - 11.6 Tabla resumen (reposo, CPT, recuperación)
-    
-12. Análisis de resultados
+# Resultados experimentales
 
-## 13. Preguntas para la discusión
+### 4.1 Señal PPG cruda
+En la Figura 4 se presenta la señal fotopletismográfica (PPG) adquirida directamente del sensor, sin aplicar ningún tipo de procesamiento digital. Se observa una señal periódica correspondiente a los cambios en el volumen sanguíneo periférico a lo largo del tiempo, sobre la cual pueden identificarse variaciones en amplitud y forma asociadas a cada ciclo cardíaco.
 
-### 13.1 ¿Cómo se relacionan las variaciones del volumen sanguíneo periférico con el balance autonómico?
+<p align="center"> <img width="300" height="190" alt="image" src="https://github.com/user-attachments/assets/a1b1e1fb-48d4-4633-a8b7-c6ffad5667d9" /> <br> <b>Fig. 4.</b> Señal PPG cruda obtenida durante la adquisición. </p>
+
+### 4.2 Señal con picos y valles detectados
+En la Figura 5 se muestra la señal PPG junto con los picos y valles detectados mediante el método del alpinista. Los picos corresponden a los máximos locales asociados a cada latido cardíaco, mientras que los valles representan los mínimos entre pulsos consecutivos. Esta detección permite segmentar la señal para la posterior extracción de parámetros fisiológicos.
+
+<p align="center"> <img width="300" height="190" alt="image" src="https://github.com/user-attachments/assets/020f44d0-9a43-4374-8e4b-d006ed0747f1" /> <br> <b>Fig. 5.</b> Detección de picos (máximos) y valles (mínimos) en la señal PPG. </p>
+
+### 4.3 Intervalo RR / PPI
+A partir de la detección de los picos en la señal PPG se calculó el intervalo entre pulsos consecutivos (PPI), equivalente al intervalo RR en señales electrocardiográficas. Este parámetro representa el tiempo entre latidos y permite estimar la dinámica de la frecuencia cardíaca a lo largo de la señal adquirida.
+
+### 4.4 Parámetros obtenidos
+A partir del procesamiento de la señal se obtuvieron los siguientes valores característicos:
+- Latidos detectados: 165
+- Intervalo RR promedio: 0.719 s
+- Frecuencia cardíaca promedio: 83.98 BPM
+Estos valores describen el comportamiento global de la señal cardíaca durante el tiempo de adquisición.
+
+### 4.5 Amplitud de pulso (PPGA)
+La amplitud de pulso (PPGA) se obtuvo como la diferencia entre cada pico y su valle correspondiente. Este parámetro refleja la variación del volumen sanguíneo periférico en cada ciclo cardíaco y está relacionado con cambios en la perfusión y el tono vascular.
+
+### 4.6 Evolución temporal del SPI
+En la Figura 6 se presenta la evolución temporal del índice pletismográfico quirúrgico (SPI), calculado a partir de los parámetros PPI y PPGA. La señal muestra variaciones a lo largo del tiempo, permitiendo observar cambios en el comportamiento del índice durante la adquisición.
+
+<p align="center"> <img width="300" height="190" alt="image" src="https://github.com/user-attachments/assets/76d701ba-5a51-43af-bdaf-18645facece3" /> <br> <b>Fig. 6.</b> Evolución temporal del índice pletismográfico quirúrgico (SPI). </p>
+### 4.7 Valores del SPI
+
+A partir del cálculo del índice pletismográfico quirúrgico se obtuvieron los siguientes valores:
+- SPI promedio: 48.39
+- SPI mínimo: 28.64
+- SPI máximo: 73.70
+Estos valores representan el rango de variación del índice durante la adquisición de la señal.
+
+### 4.7 Tabla resumen(reposo, CPT, recuperación)
+Se elaboró una tabla resumen que contiene los valores representativos de los parámetros calculados (frecuencia cardíaca y SPI) en tres condiciones experimentales: reposo, durante la aplicación del Cold Pressor Test (CPT) y en la fase de recuperación. Esta tabla permite organizar los resultados obtenidos para su posterior análisis.
+-----   
+# Análisis de resultados
+
+La señal PPG obtenida presenta un comportamiento periódico claro, lo que indica una correcta adquisición de las variaciones del volumen sanguíneo . La detección de picos y valles fue consistente al bajar el unbral de picos de 6 a 3, permitiendo calcular de manera adecuada el intervalo entre pulsos (PPI) y la amplitud de pulso (PPGA). El intervalo RR promedio de 0.719 s corresponde a una frecuencia cardíaca de 83.98 BPM el cual es una valor fisiológicamente coherente. La variación de la amplitud de pulso a lo largo del tiempo sugiere cambios en la perfusión periférica asociados a la modulación del tono vascular.
+
+La evolución del SPI mostró valores entre 28.64 y 73.70, con un promedio de 48.39, lo cual es consistente con el comportamiento esperado ante la aplicación del Cold Pressor Test (CPT) diseñado al ser 80s en reposo y 40s de alteracion causa por el frio. Durante este estímulo se produce activación del sistema nervioso simpático, generando vasoconstricción y cambios en la frecuencia cardíaca que incrementan el SPI. Aunque los resultados son coherentes fisiológicamente, el índice obtenido corresponde a una aproximación experimental, ya que depende de un sensor no clínico y de procesamiento offline, lo cual introduce limitaciones en la precisión del sistema.
+
+-----   
+# Preguntas para la discusión
+
+### 5.1 ¿Cómo se relacionan las variaciones del volumen sanguíneo periférico con el balance autonómico?
     
 Las variaciones del volumen sanguíneo periférico se relacionan directamente con el balance autonómico porque la señal PPG depende del flujo sanguíneo periférico y del tono vascular, ambos regulados por el sistema nervioso autónomo. Cuando aumenta la actividad simpática, suele presentarse vasoconstricción periférica y disminución de la perfusión, lo que puede reducir la amplitud de la onda pletismográfica; en condiciones de mayor estabilidad o predominio vagal, la perfusión periférica tiende a ser más uniforme [1], [6], [7], [10].
 
 Además, se ha reportado que características extraídas de la PPG permiten diferenciar estados de activación autonómica, incluyendo respiración profunda, cold pressor test y activación simpática cardiaca. Por eso, los cambios en amplitud y variabilidad de la señal periférica pueden interpretarse como una manifestación indirecta del equilibrio entre actividad simpática y parasimpática [10]
     
-### 13.2 ¿Cómo se compara el SPI con otros índices como ANI e índice de perfusión?
+### 5.2 ¿Cómo se compara el SPI con otros índices como ANI e índice de perfusión?
 
 El SPI es un índice orientado al monitoreo de nocicepción que usa señales fotopletismográficas y cardiovasculares, por lo que integra cambios del pulso periférico y del intervalo entre latidos en un valor numérico fácil de interpretar [11]. En cambio, el ANI se basa principalmente en el análisis de la variabilidad de la frecuencia cardiaca, por lo que refleja sobre todo el componente parasimpático del balance autonómico [12].
 
 Por su parte, el índice de perfusión (PI) no está diseñado específicamente para nocicepción. Este parámetro representa la relación entre la porción pulsátil y la no pulsátil de la circulación periférica y está influido principalmente por el gasto cardiaco y por el balance simpático-parasimpático [13]. Por ello, el PI es más útil para evaluar perfusión periférica y cambios hemodinámicos, mientras que el SPI busca ser más específico para cambios relacionados con nocicepción [11], [13].
 
-De forma general, las revisiones disponibles muestran que SPI y ANI son herramientas útiles, pero ninguna es perfecta ni universal para todos los contextos clínicos. Por eso, deben interpretarse como índices complementarios dentro del análisis fisiológico y no como medidas absolutas del dolor [12], [14 
+De forma general, las revisiones disponibles muestran que SPI y ANI son herramientas útiles, pero ninguna es perfecta ni universal para todos los contextos clínicos. Por eso, deben interpretarse como índices complementarios dentro del análisis fisiológico y no como medidas absolutas del dolor [12], [14]
 
 
-## 15. Conclusiones
-- La práctica permitió comprobar que el SPI puede estimarse a partir de características de la onda de pulso, especialmente el intervalo entre pulsos y la amplitud del pulso, cumpliendo con el objetivo de extraer información fisiológica desde la señal PPG.
+# Conclusiones
+La práctica permitió comprobar que el SPI puede estimarse a partir de la señal PPG, utilizando principalmente el intervalo entre pulsos (PPI) y la amplitud del pulso (PPGA). Esto cumple con el objetivo de extraer información fisiológica relevante a partir de una medición no invasiva, evidenciando la relación entre la señal y la actividad del sistema nervioso autónomo.
+El montaje analógico propuesto inicialmente presentó dificultades prácticas debido a su alta sensibilidad a ruido, calibración y condiciones de implementación. Por esta razón, el uso del ESP32 junto con el sensor MAX30102 permitió obtener una señal más estable y adecuada para el procesamiento en MATLAB, facilitando la detección de picos y el cálculo del SPI.
+Una limitación importante fue que el análisis se centró principalmente en valores globales (como el SPI promedio), sin realizar una comparación detallada entre las fases de reposo, CPT y recuperación. Esto impidió aprovechar completamente el protocolo experimental para interpretar los cambios fisiológicos inducidos por el estímulo.
+En general, la práctica permitió comprender que el SPI no depende únicamente de una fórmula, sino de toda una cadena de adquisición, procesamiento y análisis. Además, se evidenció que este índice debe interpretarse como una herramienta complementaria para evaluar cambios autonómicos, teniendo en cuenta sus limitaciones experimentales y su diferencia frente a mediciones clínicas directas.
 
-- El circuito analógico propuesto en la guía era válido en teoría, pero en la práctica resultó difícil de implementar de forma estable. Su funcionamiento dependía al mismo tiempo del sensor de reflectancia, del montaje en protoboard, del ajuste de potenciómetros, del control del offset y del nivel de interferencia; por eso, no es correcto atribuir la falla de todos los grupos a una sola causa, sino a la sensibilidad general del montaje y a su baja tolerancia a errores de calibración.
-
-- El uso de ESP32 con MAX30102 permitió continuar con la práctica y obtener una señal PPG más estable para el procesamiento en MATLAB. Esto facilitó la captura de la señal, la detección de picos y el cálculo del SPI, aunque ya no correspondió exactamente al sistema discreto original planteado en la Parte A.
-
-- Una limitación importante del trabajo fue que se reportó principalmente un SPI promedio, cuando la guía pedía registrar el comportamiento del índice antes, durante y después del Cold Pressor Test, además de mostrar su evolución temporal. Por tanto, faltó comparar con más claridad las tres fases del protocolo: reposo, CPT y recuperación.
-
-- la práctica sí permitió avanzar en lo esencial: capturar una señal PPG, procesarla y estimar un SPI en condiciones ambulatorias. Sin embargo, para que el informe quedara más completo, habría sido conveniente incluir una comparación más explícita entre fases del experimento, más discusión sobre las limitaciones del montaje original y una interpretación más cuidadosa de los valores obtenidos frente al contexto clínico del SPI.
-
-
-- En términos generales, la práctica permitió entender que el SPI no depende únicamente de aplicar una fórmula, sino de toda una cadena de adquisición, procesamiento e interpretación fisiológica. Aunque se logró capturar una señal PPG y estimar el índice con el sistema implementado, también quedó en evidencia que el resultado final está muy condicionado por la calidad de la señal, la estabilidad del montaje y la forma en que se analizan los datos. Además, la guía no solo pedía obtener un valor numérico, sino monitorear el SPI en reposo, durante la aplicación del Cold Pressor Test y en recuperación, así como plantear explicaciones fisiológicas y reflexionar sobre la diferencia entre nocicepción y dolor. Por eso, la principal enseñanza de la práctica fue que el SPI debe interpretarse como una herramienta de apoyo para analizar cambios autonómicos y nociceptivos, pero siempre dentro de sus limitaciones experimentales y clínicas
-
-
+-----   
 
 20. Bibliografía
 
