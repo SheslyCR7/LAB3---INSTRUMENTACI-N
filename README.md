@@ -22,7 +22,7 @@ Hardware:
 
 La fotopletismografía (PPG) es una técnica óptica no invasiva que permite medir cambios en el volumen sanguíneo periférico mediante la interacción entre la luz y los tejidos biológicos [1].
 
-A partir de esta señal es posible obtener parámetros fisiológicos como la frecuencia cardiaca y la amplitud del pulso, los cuales reflejan la actividad del sistema cardiovascular y del sistema nervioso autónomo [2].
+A partir de esta señal es posible obtener parámetros fisiológicos como la frecuencia cardíaca y la amplitud del pulso, los cuales reflejan la actividad del sistema cardiovascular y del sistema nervioso autónomo [2].
 
 El índice pletismográfico quirúrgico (SPI) es un parámetro derivado de la señal PPG que combina información del intervalo entre latidos y la amplitud del pulso, permitiendo estimar la respuesta fisiológica ante estímulos como el estrés o la nocicepción.
 
@@ -54,7 +54,7 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
 En esta práctica se utilizó un ESP32 junto con el sensor MAX30102 para adquirir la señal fotopletismográfica. En el código de Arduino IDE, la comunicación con el sensor se realizó por protocolo I2C mediante Wire.begin(21,22), y la transmisión de datos hacia MATLAB se hizo por puerto serial a 115200 baudios. Además, el sistema se configuró para trabajar a una frecuencia de muestreo de 100 Hz, adecuada para registrar la onda de pulso periférica y sus variaciones en el tiempo. La PPG es una técnica óptica no invasiva que permite medir cambios de volumen sanguíneo periférico y obtener información cardiovascular a partir de la señal registrada [1].
 
   ### 2.3 Verificación de la señal
-La verificación de la señal consistió en comprobar que la salida del sistema presentara una forma de onda periódica compatible con una señal PPG. En el código del ESP32 se tomó la lectura del canal infrarrojo con getIR() y posteriormente se invirtió la señal para facilitar su visualización. Esta etapa fue importante porque la señal PPG contiene una componente pulsátil asociada al ciclo cardiaco y una componente lenta relacionada con otros fenómenos fisiológicos [1]. Por ello, antes del procesamiento en MATLAB se verificó que la señal mostrara pulsos repetitivos y una amplitud suficientemente estable para detectar eventos característicos como picos y valles [1], [2].
+La verificación de la señal consistió en comprobar que la salida del sistema presentara una forma de onda periódica compatible con una señal PPG. En el código del ESP32 se tomó la lectura del canal infrarrojo con getIR() y posteriormente se invirtió la señal para facilitar su visualización. Esta etapa fue importante porque la señal PPG contiene una componente pulsátil asociada al ciclo cardíaco y una componente lenta relacionada con otros fenómenos fisiológicos [1]. Por ello, antes del procesamiento en MATLAB se verificó que la señal mostrara pulsos repetitivos y una amplitud suficientemente estable para detectar eventos característicos como picos y valles [1], [2].
   ### 2.4 Captura de datos
 
 La captura de datos se realizó en MATLAB, donde el programa recibió las muestras enviadas por el ESP32, las almacenó junto con su respectiva marca temporal y las representó en tiempo real en una gráfica. El script también permitió definir la duración de la toma y guardar la señal en un archivo .mat para su análisis posterior. Esta etapa fue necesaria porque el estudio del SPI requiere una señal continua y ordenada en el tiempo, a partir de la cual puedan calcularse variables como el intervalo entre pulsos y la amplitud del pulso [1].
@@ -68,18 +68,18 @@ Para la detección de picos se implementó en MATLAB una versión adaptada del m
    <p align="center">
      Fig. 2. Explicacion del cálculo de SPI
     </p>
-Una vez detectados los picos, se calculó el intervalo entre pulsos consecutivos (PPI) y la amplitud de la onda pletismográfica (PPGA), definida como la diferencia entre el pico y el valle asociado. Estas dos variables tienen fundamento fisiológico porque la PPG refleja cambios de volumen sanguíneo periférico, los cuales dependen tanto de la dinámica cardiaca como del tono vascular [1], [7]. En este trabajo, el SPI se estimó a partir de una combinación normalizada de PPI y PPGA, lo cual permitió obtener un índice relativo de cambio fisiológico a lo largo del experimento. Aunque esta implementación corresponde a una aproximación académica, conserva la idea de relacionar la amplitud del pulso y el intervalo entre latidos con la actividad autonómica y la respuesta fisiológica al estímulo [1], [6].
+Una vez detectados los picos, se calculó el intervalo entre pulsos consecutivos (PPI) y la amplitud de la onda pletismográfica (PPGA), definida como la diferencia entre el pico y el valle asociado. Estas dos variables tienen fundamento fisiológico porque la PPG refleja cambios de volumen sanguíneo periférico, los cuales dependen tanto de la dinámica cardíaca como del tono vascular [1], [7]. En este trabajo, el SPI se estimó a partir de una combinación normalizada de PPI y PPGA, lo cual permitió obtener un índice relativo de cambio fisiológico a lo largo del experimento. Aunque esta implementación corresponde a una aproximación académica, conserva la idea de relacionar la amplitud del pulso y el intervalo entre latidos con la actividad autonómica y la respuesta fisiológica al estímulo [1], [6].
   ### 2.7 Protocolo experimental (CPT)
   
 El protocolo experimental se planteó en tres etapas: reposo, aplicación del Cold Pressor Test (CPT) y recuperación. El CPT se utilizó como maniobra para inducir una respuesta fisiológica aguda semejante a la activación asociada al dolor o al estrés, permitiendo observar cambios en la señal PPG y en el SPI. Esta prueba se emplea ampliamente para estudiar reactividad cardiovascular y activación del sistema nervioso autónomo [4], [5]. Desde el punto de vista fisiológico, el estímulo frío genera respuestas autonómicas que modifican el tono vascular periférico y la dinámica hemodinámica, lo que justifica su uso en esta práctica como método de validación del sistema desarrollado [4], [5], [6].   
 
 # Fundamento teórico del SPI
 
-El índice pletismográfico quirúrgico (SPI) se basa en la señal fotopletismográfica (PPG), una técnica óptica no invasiva que permite registrar cambios de volumen sanguíneo periférico [1]. Esta señal contiene información útil sobre el pulso cardiaco y sobre cambios en la perfusión periférica, por lo que puede emplearse para estudiar variaciones fisiológicas del sistema cardiovascular [1], [2].
+El índice pletismográfico quirúrgico (SPI) se basa en la señal fotopletismográfica (PPG), una técnica óptica no invasiva que permite registrar cambios de volumen sanguíneo periférico [1]. Esta señal contiene información útil sobre el pulso cardíaco y sobre cambios en la perfusión periférica, por lo que puede emplearse para estudiar variaciones fisiológicas del sistema cardiovascular [1], [2].
 
-El fundamento fisiológico del SPI está en que el sistema nervioso autónomo modifica tanto la frecuencia cardiaca como el tono vascular [6]. Cuando hay una respuesta de estrés o un estímulo como el Cold Pressor Test (CPT), pueden presentarse cambios en la amplitud del pulso y en el intervalo entre latidos, lo cual se refleja en la señal PPG [4], [5], [7].
+El fundamento fisiológico del SPI está en que el sistema nervioso autónomo modifica tanto la frecuencia cardíaca como el tono vascular [6]. Cuando hay una respuesta de estrés o un estímulo como el Cold Pressor Test (CPT), pueden presentarse cambios en la amplitud del pulso y en el intervalo entre latidos, lo cual se refleja en la señal PPG [4], [5], [7].
 
-En esta práctica, el SPI se estimó a partir de dos características principales de la señal:.
+En esta práctica, el SPI se estimó a partir de dos características principales de la señal:
 
 ```python
 PPGA = Pico - Valle
@@ -100,7 +100,7 @@ De esta manera, el SPI permitió observar cambios relativos en el estado fisiol�
 -----
 # Técnica Cold Pressor Test (CPT)
 
-El Cold Pressor Test es una técnica utilizada para inducir una respuesta de estrés fisiológico mediante la exposición al frío. Este estímulo activa el sistema nervioso simpático, generando cambios en la frecuencia cardiaca y en la señal PPG [4][5].
+El Cold Pressor Test es una técnica utilizada para inducir una respuesta de estrés fisiológico mediante la exposición al frío. Este estímulo activa el sistema nervioso simpático, generando cambios en la frecuencia cardíaca y en la señal PPG [4][5].
 
 <p align="center">
  <img width="282" height="179" alt="image" src="https://github.com/user-attachments/assets/a1045cbd-82ec-4ae5-9e56-4f063caf64c1" />
@@ -260,18 +260,18 @@ figure
 plot(t_spi,SPI,'LineWidth',2)
 xlabel('Tiempo (s)')
 ylabel('SPI')
-title('Indice Pletismografico Quirurgico (SPI)')
+title('Índice Pletismográfico Quirúrgico (SPI)')
 grid on
 ```
-Además, el código mostró en consola algunos parámetros resumen del registro, como el número de latidos detectados, el intervalo promedio entre pulsos y la frecuencia cardiaca media
+Además, el código mostró en consola algunos parámetros resumen del registro, como el número de latidos detectados, el intervalo promedio entre pulsos y la frecuencia cardíaca media
 
 ```python
 fprintf('Latidos detectados: %d\n',length(picos))
 fprintf('RR promedio: %.3f s\n',mean(RR))
-fprintf('Frecuencia cardiaca promedio: %.2f BPM\n',mean(HR))
+fprintf('Frecuencia cardíaca promedio: %.2f BPM\n',mean(HR))
 fprintf('SPI promedio: %.2f\n',mean(SPI))
 fprintf('SPI minimo: %.2f\n',min(SPI))
-fprintf('SPI maximo: %.2f\n',max(SPI))
+fprintf('SPI máximo: %.2f\n',max(SPI))
 ```
 # Resultados experimentales
 
@@ -317,9 +317,9 @@ Se elaboró una tabla resumen que contiene los valores representativos de los pa
 -----   
 # Análisis de resultados
 
-La señal PPG obtenida presenta un comportamiento periódico claro, lo que indica una correcta adquisición de las variaciones del volumen sanguíneo . La detección de picos y valles fue consistente al bajar el unbral de picos de 6 a 3, permitiendo calcular de manera adecuada el intervalo entre pulsos (PPI) y la amplitud de pulso (PPGA). El intervalo RR promedio de 0.719 s corresponde a una frecuencia cardíaca de 83.98 BPM el cual es una valor fisiológicamente coherente. La variación de la amplitud de pulso a lo largo del tiempo sugiere cambios en la perfusión periférica asociados a la modulación del tono vascular.
+La señal PPG obtenida presenta un comportamiento periódico claro, lo que indica una correcta adquisición de las variaciones del volumen sanguíneo . La detección de picos y valles fue consistente al bajar el umbral de picos de 6 a 3, permitiendo calcular de manera adecuada el intervalo entre pulsos (PPI) y la amplitud de pulso (PPGA). El intervalo RR promedio de 0.719 s corresponde a una frecuencia cardíaca de 83.98 BPM el cual es una valor fisiológicamente coherente. La variación de la amplitud de pulso a lo largo del tiempo sugiere cambios en la perfusión periférica asociados a la modulación del tono vascular.
 
-La evolución del SPI mostró valores entre 28.64 y 73.70, con un promedio de 48.39, lo cual es consistente con el comportamiento esperado ante la aplicación del Cold Pressor Test (CPT) diseñado al ser 80s en reposo y 40s de alteracion causa por el frio. Durante este estímulo se produce activación del sistema nervioso simpático, generando vasoconstricción y cambios en la frecuencia cardíaca que incrementan el SPI. Aunque los resultados son coherentes fisiológicamente, el índice obtenido corresponde a una aproximación experimental, ya que depende de un sensor no clínico y de procesamiento offline, lo cual introduce limitaciones en la precisión del sistema.
+La evolución del SPI mostró valores entre 28.64 y 73.70, con un promedio de 48.39, lo cual es consistente con el comportamiento esperado ante la aplicación del Cold Pressor Test (CPT) diseñado al ser 80s en reposo y 40s de alteración causa por el frio. Durante este estímulo se produce activación del sistema nervioso simpático, generando vasoconstricción y cambios en la frecuencia cardíaca que incrementan el SPI. Aunque los resultados son coherentes fisiológicamente, el índice obtenido corresponde a una aproximación experimental, ya que depende de un sensor no clínico y de procesamiento offline, lo cual introduce limitaciones en la precisión del sistema.
 
 -----   
 # Preguntas para la discusión
@@ -328,13 +328,13 @@ La evolución del SPI mostró valores entre 28.64 y 73.70, con un promedio de 48
     
 Las variaciones del volumen sanguíneo periférico se relacionan directamente con el balance autonómico porque la señal PPG depende del flujo sanguíneo periférico y del tono vascular, ambos regulados por el sistema nervioso autónomo. Cuando aumenta la actividad simpática, suele presentarse vasoconstricción periférica y disminución de la perfusión, lo que puede reducir la amplitud de la onda pletismográfica; en condiciones de mayor estabilidad o predominio vagal, la perfusión periférica tiende a ser más uniforme [1], [6], [7], [10].
 
-Además, se ha reportado que características extraídas de la PPG permiten diferenciar estados de activación autonómica, incluyendo respiración profunda, cold pressor test y activación simpática cardiaca. Por eso, los cambios en amplitud y variabilidad de la señal periférica pueden interpretarse como una manifestación indirecta del equilibrio entre actividad simpática y parasimpática [10]
+Además, se ha reportado que características extraídas de la PPG permiten diferenciar estados de activación autonómica, incluyendo respiración profunda, cold pressor test y activación simpática cardíaca. Por eso, los cambios en amplitud y variabilidad de la señal periférica pueden interpretarse como una manifestación indirecta del equilibrio entre actividad simpática y parasimpática [10]
     
 ### 5.2 ¿Cómo se compara el SPI con otros índices como ANI e índice de perfusión?
 
-El SPI es un índice orientado al monitoreo de nocicepción que usa señales fotopletismográficas y cardiovasculares, por lo que integra cambios del pulso periférico y del intervalo entre latidos en un valor numérico fácil de interpretar [11]. En cambio, el ANI se basa principalmente en el análisis de la variabilidad de la frecuencia cardiaca, por lo que refleja sobre todo el componente parasimpático del balance autonómico [12].
+El SPI es un índice orientado al monitoreo de nocicepción que usa señales fotopletismográficas y cardiovasculares, por lo que integra cambios del pulso periférico y del intervalo entre latidos en un valor numérico fácil de interpretar [11]. En cambio, el ANI se basa principalmente en el análisis de la variabilidad de la frecuencia cardíaca, por lo que refleja sobre todo el componente parasimpático del balance autonómico [12].
 
-Por su parte, el índice de perfusión (PI) no está diseñado específicamente para nocicepción. Este parámetro representa la relación entre la porción pulsátil y la no pulsátil de la circulación periférica y está influido principalmente por el gasto cardiaco y por el balance simpático-parasimpático [13]. Por ello, el PI es más útil para evaluar perfusión periférica y cambios hemodinámicos, mientras que el SPI busca ser más específico para cambios relacionados con nocicepción [11], [13].
+Por su parte, el índice de perfusión (PI) no está diseñado específicamente para nocicepción. Este parámetro representa la relación entre la porción pulsátil y la no pulsátil de la circulación periférica y está influido principalmente por el gasto cardíaco y por el balance simpático-parasimpático [13]. Por ello, el PI es más útil para evaluar perfusión periférica y cambios hemodinámicos, mientras que el SPI busca ser más específico para cambios relacionados con nocicepción [11], [13].
 
 De forma general, las revisiones disponibles muestran que SPI y ANI son herramientas útiles, pero ninguna es perfecta ni universal para todos los contextos clínicos. Por eso, deben interpretarse como índices complementarios dentro del análisis fisiológico y no como medidas absolutas del dolor [12], [14]
 
@@ -342,7 +342,7 @@ De forma general, las revisiones disponibles muestran que SPI y ANI son herramie
 # Conclusiones
 La práctica permitió comprobar que el SPI puede estimarse a partir de la señal PPG, utilizando principalmente el intervalo entre pulsos (PPI) y la amplitud del pulso (PPGA). Esto cumple con el objetivo de extraer información fisiológica relevante a partir de una medición no invasiva, evidenciando la relación entre la señal y la actividad del sistema nervioso autónomo.
 
-El montaje analógico propuesto inicialmente presentó dificultades prácticas debido a su alta sensibilidad,dificultad al  calibración y condiciones de implementación. Por esta razón, el uso del ESP32 junto con el sensor MAX30102 permitió obtener una señal más estable y adecuada para el procesamiento en MATLAB, facilitando la detección de picos y el cálculo del SPI.
+El montaje analógico propuesto inicialmente presentó dificultades prácticas debido a su alta sensibilidad,dificultad en la  calibración y condiciones de implementación. Por esta razón, el uso del ESP32 junto con el sensor MAX30102 permitió obtener una señal más estable y adecuada para el procesamiento en MATLAB, facilitando la detección de picos y el cálculo del SPI.
 
 Una limitación importante fue que el análisis se centró principalmente en valores globales (como el SPI promedio), sin realizar una comparación detallada entre las fases de reposo, CPT y recuperación. Esto impidió aprovechar completamente el protocolo experimental para interpretar los cambios fisiológicos inducidos por el estímulo.
 
