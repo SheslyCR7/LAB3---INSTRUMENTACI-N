@@ -47,28 +47,41 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
 9. Seguridad en el laboratorio
 10. Procedimiento experimental
    7.1 Montaje del sistema de adquisición
+
+    Se conectó el sensor MAX30102 al Arduino mediante comunicación I2C para la adquisición de la señal PPG.
+
+    <img width="642" height="415" alt="image" src="https://github.com/user-attachments/assets/398e4e7b-26f6-42a2-b0d6-675c15f29b49" />
+
    7.2 Conexión con Arduino
    7.3 Verificación de la señal
    7.4 Captura de datos
    7.5 Detección de picos y valles
    7.6 Cálculo del SPI
    7.7 Protocolo experimental (CPT)
-11. Fundamento teórico del SPI
-12. Técnica Cold Pressor Test (CPT)
-13. Código desarrollado
+12. Fundamento teórico del SPI
+13. Técnica Cold Pressor Test (CPT)
+
+El Cold Pressor Test es una técnica utilizada para inducir una respuesta de estrés fisiológico mediante la exposición al frío. Este estímulo activa el sistema nervioso simpático, generando cambios en la frecuencia cardiaca y en la señal PPG [4][5].
+
+<img width="282" height="179" alt="image" src="https://github.com/user-attachments/assets/a1045cbd-82ec-4ae5-9e56-4f063caf64c1" />
+
+<img width="440" height="360" alt="image" src="https://github.com/user-attachments/assets/27fc55ec-5aa0-41b4-b0ce-858f1c8a9bef" />
+
+
+14. Código desarrollado
     10.1 Código de captura
     10.2 Código de detección de picos
     10.3 Código de cálculo del SPI
     10.4 Código de evolución temporal del SPI
-14. Resultados experimentales
+15. Resultados experimentales
     11.1 Señal PPG cruda
     11.2 Señal con picos y valles detectados
     11.3 Intervalo RR / PPI
     11.4 Amplitud de pulso (PPGA)
     11.5 Evolución temporal del SPI
     11.6 Tabla resumen (reposo, CPT, recuperación)
-15. Análisis de resultados
-16. Preguntas para la discusión
+16. Análisis de resultados
+17. Preguntas para la discusión
     13.1 ¿Cómo se relacionan las variaciones del volumen sanguíneo periférico con el balance autonómico?
     
     El VSP periférico modula por reflejos venoarteriales: simpático causa vasoconstricción centralizando volumen (↓VSP periférico), parasimpático lo distribuye (↑flujo esplácnico/periférico). Desbalance simpático-vagal (↑simpático) reduce VFC y PPG variabilidad, como en hiperreactividad cardiovascular basal; Poincaré plot (SD1/SD2 ↓) lo confirma. [6]
