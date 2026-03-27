@@ -53,14 +53,33 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
 
     <img width="642" height="415" alt="image" src="https://github.com/user-attachments/assets/398e4e7b-26f6-42a2-b0d6-675c15f29b49" />
 
-   7.2 Conexión con ESP32
-   7.3 Verificación de la señal
-   7.4 Captura de datos
-   7.5 Detección de picos y valles
-   7.6 Cálculo del SPI
-   7.7 Protocolo experimental (CPT)
+   ### 7.2 Conexión con ESP32
+En esta práctica se utilizó un ESP32 junto con el sensor MAX30102 para adquirir la señal fotopletismográfica. En el código de Arduino IDE, la comunicación con el sensor se realizó por protocolo I2C mediante Wire.begin(21,22), y la transmisión de datos hacia MATLAB se hizo por puerto serial a 115200 baudios. Además, el sistema se configuró para trabajar a una frecuencia de muestreo de 100 Hz, adecuada para registrar la onda de pulso periférica y sus variaciones en el tiempo. La PPG es una técnica óptica no invasiva que permite medir cambios de volumen sanguíneo periférico y obtener información cardiovascular a partir de la señal registrada [1].
+
+  ### 7.3 Verificación de la señal
+La verificación de la señal consistió en comprobar que la salida del sistema presentara una forma de onda periódica compatible con una señal PPG. En el código del ESP32 se tomó la lectura del canal infrarrojo con getIR() y posteriormente se invirtió la señal para facilitar su visualización. Esta etapa fue importante porque la señal PPG contiene una componente pulsátil asociada al ciclo cardiaco y una componente lenta relacionada con otros fenómenos fisiológicos [1]. Por ello, antes del procesamiento en MATLAB se verificó que la señal mostrara pulsos repetitivos y una amplitud suficientemente estable para detectar eventos característicos como picos y valles [1], [2].
+
+   
+  ### 7.4 Captura de datos
+
+La captura de datos se realizó en MATLAB, donde el programa recibió las muestras enviadas por el ESP32, las almacenó junto con su respectiva marca temporal y las representó en tiempo real en una gráfica. El script también permitió definir la duración de la toma y guardar la señal en un archivo .mat para su análisis posterior. Esta etapa fue necesaria porque el estudio del SPI requiere una señal continua y ordenada en el tiempo, a partir de la cual puedan calcularse variables como el intervalo entre pulsos y la amplitud del pulso [1].
+
+
+  ### 7.5 Detección de picos y valles
+Para la detección de picos se implementó en MATLAB una versión adaptada del método del alpinista descrito por Argüello-Prada [3]. Este algoritmo se basa en contar ascensos consecutivos de la señal y utilizar un umbral para decidir cuándo una subida corresponde a un pico real. En el código, además, se incluyó un período refractario de 0.3 s para evitar detectar varias veces el mismo latido. Después de identificar los picos, se buscaron los mínimos entre pulsos consecutivos para obtener también los valles. Esta estrategia permitió caracterizar cada pulso con sus dos puntos principales: máximo y mínimo [3].
+   
+  ### 7.6 Cálculo del SPI
+Una vez detectados los picos, se calculó el intervalo entre pulsos consecutivos (PPI) y la amplitud de la onda pletismográfica (PPGA), definida como la diferencia entre el pico y el valle asociado. Estas dos variables tienen fundamento fisiológico porque la PPG refleja cambios de volumen sanguíneo periférico, los cuales dependen tanto de la dinámica cardiaca como del tono vascular [1], [7]. En este trabajo, el SPI se estimó a partir de una combinación normalizada de PPI y PPGA, lo cual permitió obtener un índice relativo de cambio fisiológico a lo largo del experimento. Aunque esta implementación corresponde a una aproximación académica, conserva la idea de relacionar la amplitud del pulso y el intervalo entre latidos con la actividad autonómica y la respuesta fisiológica al estímulo [1], [6].
+
+  ### 7.7 Protocolo experimental (CPT)
+  
+El protocolo experimental se planteó en tres etapas: reposo, aplicación del Cold Pressor Test (CPT) y recuperación. El CPT se utilizó como maniobra para inducir una respuesta fisiológica aguda semejante a la activación asociada al dolor o al estrés, permitiendo observar cambios en la señal PPG y en el SPI. Esta prueba se emplea ampliamente para estudiar reactividad cardiovascular y activación del sistema nervioso autónomo [4], [5]. Desde el punto de vista fisiológico, el estímulo frío genera respuestas autonómicas que modifican el tono vascular periférico y la dinámica hemodinámica, lo que justifica su uso en esta práctica como método de validación del sistema desarrollado [4], [5], [6].   
+
+
 12. Fundamento teórico del SPI
-13. Técnica Cold Pressor Test (CPT)
+
+13. 
+14. Técnica Cold Pressor Test (CPT)
 
 El Cold Pressor Test es una técnica utilizada para inducir una respuesta de estrés fisiológico mediante la exposición al frío. Este estímulo activa el sistema nervioso simpático, generando cambios en la frecuencia cardiaca y en la señal PPG [4][5].
 
