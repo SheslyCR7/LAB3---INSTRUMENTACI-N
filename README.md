@@ -1,5 +1,5 @@
 # Instrumentación Biomédica y Biosensores 
- LABORATORIO - 3 Estimación del nivel de estrés basada en la respuesta galvánica cutánea (GSR) 
+ LABORATORIO - 3 Cálculo ambulatorio del índice pletismográfico quirúrgico (SPI)  
 
 ###  Integrantes
 - Shesly Nicole Colorado - 5600756
