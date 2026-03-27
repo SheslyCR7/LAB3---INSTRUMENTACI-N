@@ -66,7 +66,7 @@ Para la detección de picos se implementó en MATLAB una versión adaptada del m
   <img width="400" height="295" alt="image" src="https://github.com/user-attachments/assets/0f802563-062f-4003-9a82-58bd38d0d904" />
    </p>
    <p align="center">
-     Fig. 2. Explicacion del cálculo de SPI
+     Fig. 2. Explicación del cálculo de SPI
     </p>
 Una vez detectados los picos, se calculó el intervalo entre pulsos consecutivos (PPI) y la amplitud de la onda pletismográfica (PPGA), definida como la diferencia entre el pico y el valle asociado. Estas dos variables tienen fundamento fisiológico porque la PPG refleja cambios de volumen sanguíneo periférico, los cuales dependen tanto de la dinámica cardíaca como del tono vascular [1], [7]. En este trabajo, el SPI se estimó a partir de una combinación normalizada de PPI y PPGA, lo cual permitió obtener un índice relativo de cambio fisiológico a lo largo del experimento. Aunque esta implementación corresponde a una aproximación académica, conserva la idea de relacionar la amplitud del pulso y el intervalo entre latidos con la actividad autonómica y la respuesta fisiológica al estímulo [1], [6].
   ### 2.7 Protocolo experimental (CPT)
@@ -107,7 +107,7 @@ El Cold Pressor Test es una técnica utilizada para inducir una respuesta de est
  <img width="282" height="179" alt="image" src="https://github.com/user-attachments/assets/27fc55ec-5aa0-41b4-b0ce-858f1c8a9bef" />
 </p>
  <p align="center">
-     Fig. 3. Fases e implementacion de la tecnica CPT
+     Fig. 3. Fases e implementación de la tecnica CPT
     </p>
 
 ----
@@ -310,16 +310,16 @@ A partir del cálculo del índice pletismográfico quirúrgico se obtuvieron los
 - SPI máximo: 73.70
 Estos valores representan el rango de variación del índice durante la adquisición de la señal.
 
-### 4.7 Tabla resumen(reposo, CPT, recuperación)
+### 4.8 Tabla resumen(reposo, CPT, recuperación)
 
 Se elaboró una tabla resumen que contiene los valores representativos de los parámetros calculados (frecuencia cardíaca y SPI) en tres condiciones experimentales: reposo, durante la aplicación del Cold Pressor Test (CPT) y en la fase de recuperación. Esta tabla permite organizar los resultados obtenidos para su posterior análisis.
 
 -----   
 # Análisis de resultados
 
-La señal PPG obtenida presenta un comportamiento periódico claro, lo que indica una correcta adquisición de las variaciones del volumen sanguíneo . La detección de picos y valles fue consistente al bajar el umbral de picos de 6 a 3, permitiendo calcular de manera adecuada el intervalo entre pulsos (PPI) y la amplitud de pulso (PPGA). El intervalo RR promedio de 0.719 s corresponde a una frecuencia cardíaca de 83.98 BPM el cual es una valor fisiológicamente coherente. La variación de la amplitud de pulso a lo largo del tiempo sugiere cambios en la perfusión periférica asociados a la modulación del tono vascular.
+La señal PPG obtenida presenta un comportamiento periódico claro, lo que indica una correcta adquisición de las variaciones del volumen sanguíneo. La detección de picos y valles fue consistente al bajar el umbral de detección de picos de 6 a 3, permitiendo calcular de manera adecuada el intervalo entre pulsos (PPI) y la amplitud de pulso (PPGA). El intervalo RR promedio de 0.719 s corresponde a una frecuencia cardíaca de 83.98 BPM, lo cual es un valor fisiológicamente coherente. La variación de la amplitud de pulso a lo largo del tiempo sugiere cambios en la perfusión periférica asociados a la modulación del tono vascular.
 
-La evolución del SPI mostró valores entre 28.64 y 73.70, con un promedio de 48.39, lo cual es consistente con el comportamiento esperado ante la aplicación del Cold Pressor Test (CPT) diseñado al ser 80s en reposo y 40s de alteración causa por el frio. Durante este estímulo se produce activación del sistema nervioso simpático, generando vasoconstricción y cambios en la frecuencia cardíaca que incrementan el SPI. Aunque los resultados son coherentes fisiológicamente, el índice obtenido corresponde a una aproximación experimental, ya que depende de un sensor no clínico y de procesamiento offline, lo cual introduce limitaciones en la precisión del sistema.
+La evolución del SPI mostró valores entre 28.64 y 73.70, con un promedio de 48.39, lo cual es consistente con el comportamiento esperado ante la aplicación del Cold Pressor Test (CPT) diseñado al ser 80s en reposo y 40s de alteración causada por el frio. Durante este estímulo se produce activación del sistema nervioso simpático, generando vasoconstricción y cambios en la frecuencia cardíaca que incrementan el SPI. Aunque los resultados son coherentes fisiológicamente, el índice obtenido corresponde a una aproximación experimental, ya que depende de un sensor no clínico y de procesamiento offline, lo cual introduce limitaciones en la precisión del sistema.
 
 -----   
 # Preguntas para la discusión
