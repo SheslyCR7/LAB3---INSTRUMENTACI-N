@@ -16,7 +16,7 @@ Hardware:
 - Sensor de humedad del suelo YL-100
 - ESP32
 ----
-3. Introducción
+## 3. Introducción
 
 La fotopletismografía (PPG) es una técnica óptica no invasiva que permite medir cambios en el volumen sanguíneo periférico mediante la interacción entre la luz y los tejidos biológicos [1].
 
@@ -24,7 +24,7 @@ A partir de esta señal es posible obtener parámetros fisiológicos como la fre
 
 El índice pletismográfico quirúrgico (SPI) es un parámetro derivado de la señal PPG que combina información del intervalo entre latidos y la amplitud del pulso, permitiendo estimar la respuesta fisiológica ante estímulos como el estrés o la nocicepción.
 
-4. Objetivos
+## 4. Objetivos
    
    3.1 Objetivo general
    
@@ -36,15 +36,16 @@ El índice pletismográfico quirúrgico (SPI) es un parámetro derivado de la se
    • Construir un sistema que calcule el SPI en tiempo real y bajo condiciones ambulatorias.
    • Validar el funcionamiento del sistema desarrollado mediante un método que induzca una respuesta fisiológica similar a la que produce el dolor agudo.
 
-5. Descripción general de la práctica
+## 5. Descripción general de la práctica
 
 Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX30102 conectado a un Arduino. La señal fue procesada en MATLAB, donde se aplicó un algoritmo de detección de picos basado en el método del alpinista. A partir de esta información se calcularon variables fisiológicas y el SPI, evaluando su comportamiento bajo diferentes condiciones experimentales.
    
-7. Materiales y herramientas utilizadas
+## 7. Materiales y herramientas utilizadas
 
    Arduino, sensor MAX30102, protoboard, cables, computador y MATLAB.
    
-9. Seguridad en el laboratorio
+## 9. Seguridad en el laboratorio
+
 10. Procedimiento experimental
    7.1 Montaje del sistema de adquisición
 
@@ -52,7 +53,7 @@ Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX
 
     <img width="642" height="415" alt="image" src="https://github.com/user-attachments/assets/398e4e7b-26f6-42a2-b0d6-675c15f29b49" />
 
-   7.2 Conexión con Arduino
+   7.2 Conexión con ESP32
    7.3 Verificación de la señal
    7.4 Captura de datos
    7.5 Detección de picos y valles
