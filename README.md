@@ -36,7 +36,7 @@ El índice pletismográfico quirúrgico (SPI) es un parámetro derivado de la se
    
 # 3. Descripción general de la práctica
 
-Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX30102 conectado a un Arduino. La señal fue procesada en MATLAB, donde se aplicó un algoritmo de detección de picos basado en el método del alpinista. A partir de esta información se calcularon variables fisiológicas y el SPI, evaluando su comportamiento bajo diferentes condiciones experimentales.
+Se implementó un sistema de adquisición de señal PPG utilizando el sensor MAX30102 conectado a un ESP32. La señal fue procesada en MATLAB, donde se aplicó un algoritmo de detección de picos basado en el método del alpinista. A partir de esta información se calcularon variables fisiológicas y el SPI, evaluando su comportamiento bajo diferentes condiciones experimentales.
    
 # 4. Seguridad en el laboratorio
 
@@ -324,7 +324,7 @@ Se elaboró una tabla resumen que contiene los valores representativos de los pa
 
 La señal PPG obtenida presenta un comportamiento periódico claro, lo que indica una correcta adquisición de las variaciones del volumen sanguíneo. La detección de picos y valles fue consistente al bajar el umbral de detección de picos de 6 a 3, permitiendo calcular de manera adecuada el intervalo entre pulsos (PPI) y la amplitud de pulso (PPGA). El intervalo RR promedio de 0.719 s corresponde a una frecuencia cardíaca de 83.98 BPM, lo cual es un valor fisiológicamente coherente. La variación de la amplitud de pulso a lo largo del tiempo sugiere cambios en la perfusión periférica asociados a la modulación del tono vascular.
 
-La evolución del SPI mostró valores entre 28.64 y 73.70, con un promedio de 48.39, lo cual es consistente con el comportamiento esperado ante la aplicación del Cold Pressor Test (CPT) diseñado al ser 80s en reposo y 40s de alteración causada por el frio. Durante este estímulo se produce activación del sistema nervioso simpático, generando vasoconstricción y cambios en la frecuencia cardíaca que incrementan el SPI. Aunque los resultados son coherentes fisiológicamente, el índice obtenido corresponde a una aproximación experimental, ya que depende de un sensor no clínico y de procesamiento offline, lo cual introduce limitaciones en la precisión del sistema.
+La evolución del SPI mostró valores entre 28.64 y 73.70, con un promedio de 48.39, lo cual es consistente con el comportamiento esperado ante la aplicación del Cold Pressor Test (CPT) diseñado al ser 80s en reposo y 40s de alteración causada por el frío. Durante este estímulo se produce activación del sistema nervioso simpático, generando vasoconstricción y cambios en la frecuencia cardíaca que incrementan el SPI. Aunque los resultados son coherentes fisiológicamente, el índice obtenido corresponde a una aproximación experimental, ya que depende de un sensor no clínico y al no calcular el SPI en tiempo real sino de forma offline, limita su aplicación en monitoreo continuo por lo que introduce limitaciones en la precisión del sistema.
 
 -----   
 # 11. Preguntas para la discusión
